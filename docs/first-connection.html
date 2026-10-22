@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Your first connection | Tabulo docs">
+<meta property="og:description" content="A five-minute tour. You'll open a SQLite database, look at a table, filter it, run a query, and make an edit you can review before it's saved.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Your first connection | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A five-minute tour. You'll open a SQLite database, look at a table, filter it, run a query, and make an edit you can review before it's saved.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Your first connection <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html" aria-current="page">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Your first connection</h1><p>A five-minute tour. You'll open a SQLite database, look at a table, filter it, run a query, and make an edit you can review before it's saved.</p></header>
+<p>You need any SQLite file. If you don't have one, the Tabulo source includes <code>samples/demo.db</code> with <code>customers</code>, <code>orders</code> and a <code>big_orders</code> view. This tour uses it.</p>
+<figure><img src="../img/welcome.jpg" width="860" height="520" alt="The Tabulo welcome window with saved connections and a folder" class="shot"></figure>
+<ol class="tut">
+  <li><b>Open the database</b><p>Start Tabulo. In the welcome window click <b>Open SQLite File…</b> and choose the file. Tabulo saves it as a connection and opens a workspace window for it.</p></li>
+  <li><b>Open a table</b><p>The sidebar lists tables and views. Click <code>orders</code> once to preview it in a tab. Double-click it to keep the tab open when you pick another table.</p></li>
+  <li><b>Filter the rows</b><p>Click <b>Filter</b> (<kbd>⌥</kbd><kbd>⌘</kbd><kbd>F</kbd>). Pick a column, an operator and a value, or type a WHERE clause in the second line, for example <code>status = 'shipped' AND total &gt; 1000</code>. Click <b>Apply</b>.</p></li>
+  <li><b>Follow a foreign key</b><p><code>customer_id</code> cells show a small arrow. Click it to open the customer in a new tab, already filtered to that row.</p></li>
+  <li><b>Edit a cell</b><p>Back on <code>orders</code>, double-click a <code>note</code> cell, type <code>priority</code> and press <kbd>↵</kbd>. The cell turns yellow and the bottom bar says <b>1 pending change</b>. Nothing has been written yet.</p>
+    <figure><img src="../img/grid.jpg" width="1320" height="820" alt="The orders table with an edited note cell highlighted yellow and the row details panel on the right" class="shot"></figure></li>
+  <li><b>Review, then commit or discard</b><p>Click <b>Review…</b> (<kbd>⇧</kbd><kbd>⌘</kbd><kbd>S</kbd>) to see the exact <code>UPDATE</code> statement. Click <b>Commit</b> to write it, or close the window and click <b>Discard</b> to throw the change away.</p></li>
+  <li><b>Run a query</b><p>Press <kbd>⌘</kbd><kbd>T</kbd> for a query tab, type SQL and press <kbd>⌘</kbd><kbd>↵</kbd>. Results open in a grid below the editor.</p>
+<pre><code>SELECT c.name, c.city, COUNT(o.id) AS orders, ROUND(SUM(o.total), 2) AS revenue
+FROM customers c
+JOIN orders o ON o.customer_id = c.id
+GROUP BY c.id
+ORDER BY revenue DESC;</code></pre></li>
+  <li><b>Jump anywhere</b><p>Press <kbd>⌘</kbd><kbd>P</kbd> and type part of a table name to open it.</p></li>
+</ol>
+<h2>Next</h2>
+<div class="cards">
+  <a class="card" href="connections.html"><b>Connect to a server</b><span>PostgreSQL, MySQL, Redis, MongoDB and Elasticsearch.</span></a>
+  <a class="card" href="import.html"><b>Import a CSV</b><span>Add or update rows from a file.</span></a>
+</div>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="install.html"><span>Previous</span>Install & update</a><a class="next" href="connections.html"><span>Next</span>Connections & folders</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

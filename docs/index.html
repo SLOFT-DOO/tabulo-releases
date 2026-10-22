@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Tabulo documentation | Tabulo docs">
+<meta property="og:description" content="Tabulo is a native Mac app for working with PostgreSQL, MySQL, SQLite, Redis, MongoDB and Elasticsearch. These pages explain every part of it, with step-by-step tutorials.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Tabulo documentation | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tabulo is a native Mac app for working with PostgreSQL, MySQL, SQLite, Redis, MongoDB and Elasticsearch. These pages explain every part of it, with step-by-step tutorials.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Overview <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html" aria-current="page">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Tabulo documentation</h1><p>Tabulo is a native Mac app for working with PostgreSQL, MySQL, SQLite, Redis, MongoDB and Elasticsearch. These pages explain every part of it, with step-by-step tutorials.</p></header>
+<p>New to Tabulo? Install it, then follow <a href="first-connection.html">Your first connection</a>. It takes about five minutes and uses a small SQLite file, so you don't need a server.</p>
+<h2>Tutorials</h2>
+<div class="cards">
+  <a class="card" href="install.html"><b>Install &amp; update</b><span>Drag to Applications, first launch, updates, uninstall.</span></a>
+  <a class="card" href="first-connection.html"><b>Your first connection</b><span>Open a database, browse a table, run a query, edit a row.</span></a>
+  <a class="card" href="import.html"><b>Update a table from a CSV</b><span>Map columns, upsert rows, review structure changes.</span></a>
+  <a class="card" href="ai.html"><b>Connect Claude</b><span>Give AI apps read-only or read-write access, per connection.</span></a>
+</div>
+<h2>Guides</h2>
+<div class="cards">
+  <a class="card" href="connections.html"><b>Connections &amp; folders</b><span>Save, organise, import from a URL, keep passwords in the Keychain.</span></a>
+  <a class="card" href="browse.html"><b>Browse tables</b><span>Tabs, paging, sorting, filters, foreign-key links.</span></a>
+  <a class="card" href="edit.html"><b>Edit rows</b><span>Staged changes, review, commit and discard.</span></a>
+  <a class="card" href="structure.html"><b>Change structure</b><span>Columns, indexes and foreign keys with generated DDL.</span></a>
+  <a class="card" href="query.html"><b>Query editor</b><span>Languages, autocomplete, results, history.</span></a>
+  <a class="card" href="export.html"><b>Export data</b><span>CSV, JSON, SQL, Excel and Markdown.</span></a>
+  <a class="card" href="safety.html"><b>Safe mode &amp; environments</b><span>Extra confirmation for production data.</span></a>
+  <a class="card" href="themes.html"><b>Themes</b><span>Seven looks for the editor, grid and window, light and dark.</span></a>
+  <a class="card" href="updates.html"><b>In-app updates</b><span>How Tabulo checks for and installs new versions.</span></a>
+</div>
+<h2>Reference</h2>
+<div class="cards">
+  <a class="card" href="databases.html"><b>Database notes</b><span>What each engine supports and its query syntax.</span></a>
+  <a class="card" href="shortcuts.html"><b>Keyboard shortcuts</b><span>Every shortcut on one page.</span></a>
+  <a class="card" href="troubleshooting.html"><b>Troubleshooting</b><span>Gatekeeper, passwords, where Tabulo keeps its files.</span></a>
+</div>
+
+<nav class="pager" aria-label="Pages"><a class="next" href="install.html"><span>Next</span>Install & update</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

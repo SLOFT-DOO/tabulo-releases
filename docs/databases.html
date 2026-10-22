@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Database notes | Tabulo docs">
+<meta property="og:description" content="What Tabulo supports for each engine, and the details that differ between them.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Database notes | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="What Tabulo supports for each engine, and the details that differ between them.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Database notes <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html" aria-current="page">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Database notes</h1><p>What Tabulo supports for each engine, and the details that differ between them.</p></header>
+<div class="table-wrap"><table><thead><tr><th>Feature</th><th>PostgreSQL</th><th>MySQL</th><th>SQLite</th><th>Redis</th><th>MongoDB</th><th>Elasticsearch</th></tr></thead><tbody>
+<tr><td>Browse &amp; filter</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Key patterns</td><td>Filter documents</td><td>Query DSL, Lucene</td></tr>
+<tr><td>Edit rows</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Documents</td></tr>
+<tr><td>Transactions</td><td>Yes</td><td>Yes (InnoDB)</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>Structure editing</td><td>Full</td><td>Full (one atomic ALTER)</td><td>Full (with rebuild)</td><td>Server info</td><td>Indexes</td><td>Mapping as columns</td></tr>
+<tr><td>Foreign-key links</td><td>Yes</td><td>Yes</td><td>Yes</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>Query language</td><td>SQL</td><td>SQL</td><td>SQL</td><td>Commands</td><td>Shell syntax</td><td>Dev Tools, SQL</td></tr>
+<tr><td>Import</td><td>CSV, JSON, SQL dump</td><td>CSV, JSON, SQL dump</td><td>CSV, JSON, SQL dump</td><td>—</td><td>CSV, JSON</td><td>CSV, JSON</td></tr>
+</tbody></table></div>
+<h2>PostgreSQL</h2>
+<ul>
+  <li>Schemas show as groups in the sidebar.</li>
+  <li>SSL: Disable, Prefer (the default), Require, Verify CA or Verify Full, with optional client key, certificate and CA files.</li>
+  <li>Connect through a Unix socket by putting its directory in <b>Host/Socket</b>, such as <code>/tmp</code>.</li>
+  <li><b>Bootstrap commands</b> run after every connect.</li>
+  <li>Values are decoded from PostgreSQL's binary format, including numeric, dates and times, intervals, arrays, UUID, inet and jsonb.</li>
+</ul>
+<h2>MySQL and MariaDB</h2>
+<ul>
+  <li>MySQL 8 (tested with 8.4) and MariaDB. Default port 3306.</li>
+  <li>Leave <b>Database</b> empty to list every database (tables show as <code>shop.orders</code>); fill it in to see just that one. System databases are hidden.</li>
+  <li>SSL <b>Prefer</b> (the default) encrypts when the server supports it and falls back otherwise; <b>Require</b> always encrypts. Accounts using <code>caching_sha2_password</code> work with SSL off too.</li>
+  <li>Connect through a Unix socket by putting its path in <b>Host/Socket</b>, such as <code>/tmp/mysql.sock</code>. <b>Bootstrap commands</b> run after every connect.</li>
+  <li>Values show as the <code>mysql</code> command line would show them: <code>tinyint(1)</code> as 1 or 0, JSON as text, binary data as <code>0x…</code> hex.</li>
+  <li>Filters with "contains" are case-insensitive under the default collations.</li>
+  <li>Edits run in one transaction on InnoDB tables. MyISAM tables have no transactions.</li>
+  <li><code>AUTO_INCREMENT</code> columns are filled in by the server when you leave them empty, in the grid and in imports.</li>
+</ul>
+<h2>SQLite</h2>
+<ul>
+  <li>Open any <code>.db</code>, <code>.sqlite</code> or <code>.sqlite3</code> file with <b>Open SQLite File…</b>.</li>
+  <li>Structure changes SQLite can't do with <code>ALTER TABLE</code> use the documented table rebuild, keeping data, indexes and constraints.</li>
+</ul>
+<h2>Redis</h2>
+<ul>
+  <li>The sidebar lists databases (db0, db1…). Keys of every type show in the grid.</li>
+  <li>Sign in with a password, or an ACL user and password. <b>Host/Socket</b> also takes a socket path such as <code>/tmp/redis.sock</code>.</li>
+  <li>The filter takes a key pattern such as <code>session:*</code>.</li>
+  <li>The query editor runs one command per line. <b>Flush Database…</b> in the sidebar asks first.</li>
+</ul>
+<h2>MongoDB</h2>
+<ul>
+  <li>Connect with host and port, or a full connection string (<code>mongodb+srv://…</code>), including replica sets with several hosts. A password in the string is kept in the Keychain.</li>
+  <li>Columns are inferred from the documents. Nested values show as JSON.</li>
+  <li>Type <code>ObjectId("…")</code> and <code>ISODate("…")</code> in cells, filters and queries.</li>
+</ul>
+<h2>Elasticsearch</h2>
+<ul>
+  <li>Connect with a <b>URL</b> (<code>https://my-cluster.es.io</code>). Over HTTPS, <b>TLS mode</b> checks the certificate against macOS (the default), a CA file you choose, or accepts any certificate.</li>
+  <li>Sign in with a user and password, or put an API key in the password field.</li>
+  <li>Indices list in the sidebar. The mapping gives the columns, with nested fields such as <code>supplier.city</code>.</li>
+  <li>Filters become query DSL, or type a Lucene query or a JSON query in the filter box.</li>
+  <li>Text fields sort by their <code>.keyword</code> sub-field. Documents can be edited, added and deleted, with values typed by the mapping.</li>
+</ul>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="safety.html"><span>Previous</span>Safe mode & environments</a><a class="next" href="shortcuts.html"><span>Next</span>Keyboard shortcuts</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

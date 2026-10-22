@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Connections & folders | Tabulo docs">
+<meta property="og:description" content="A connection stores how to reach one database. Save as many as you like, group them in folders, and tag each with its environment.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Connections & folders | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="A connection stores how to reach one database. Save as many as you like, group them in folders, and tag each with its environment.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Connections & folders <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html" aria-current="page">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Connections & folders</h1><p>A connection stores how to reach one database. Save as many as you like, group them in folders, and tag each with its environment.</p></header>
+<h2>Create a connection</h2>
+<ol class="tut">
+  <li><b>Start a new connection</b><p>In the welcome window click <b>New Connection</b> and pick the engine: PostgreSQL, MySQL, SQLite, Redis, MongoDB or Elasticsearch.</p></li>
+  <li><b>Fill in the server</b><p>Give it a <b>Name</b>, then the host, user, password and database. <b>Port</b> is optional: leave it empty to use the default shown in grey (5432, 3306, 6379, 27017). For MySQL, leave <b>Database</b> empty to see every database on the server, or fill it in to work in one. Elasticsearch takes a <b>URL</b> instead, such as <code>https://my-cluster.es.io</code>. MongoDB also takes a full connection string such as <code>mongodb+srv://…</code>, which overrides host, port and user. For SQLite, choose the database file.</p></li>
+  <li><b>Pick the SSL mode</b><p>New PostgreSQL and MySQL connections use <b>Prefer</b>: encrypted when the server supports it, plain otherwise. Choose <b>Require</b> to always encrypt, or <b>Verify CA</b> / <b>Verify Full</b> to also check the server's certificate.</p></li>
+  <li><b>Choose an environment</b><p>Set <b>Environment</b> to local, development, testing, staging or production. The colour shows in the connection list and the window, so you always know where you are. Production connections always ask before changing data (see <a href="safety.html">Safe mode</a>).</p></li>
+  <li><b>Save the password</b><p>Leave <b>Save password in Keychain</b> on to store it in the macOS Keychain. Turn it off and Tabulo asks each time you connect.</p></li>
+  <li><b>Test, then save</b><p>Click <b>Test</b> to check the details, then <b>Save</b>. Double-click the connection to open it, or select it and click <b>Connect</b>.</p></li>
+</ol>
+<h2>Host, port and sockets</h2>
+<ul>
+  <li><b>Host</b> also takes <code>db.internal:5433</code> or <code>[::1]:5433</code>. The port written there wins over the <b>Port</b> field.</li>
+  <li>Paste a whole connection URL into <b>Host</b> and Tabulo fills in host, port, user, password, database and SSL mode.</li>
+  <li>For PostgreSQL, MySQL and Redis, <b>Host/Socket</b> takes a Unix socket path instead: <code>/tmp</code> or <code>/var/run/postgresql</code> for PostgreSQL (Tabulo adds <code>.s.PGSQL.5432</code>, using the port), <code>/tmp/mysql.sock</code> for MySQL, <code>/tmp/redis.sock</code> for Redis. Sockets work over SSH too.</li>
+</ul>
+<h2>Bootstrap commands</h2>
+<p>PostgreSQL and MySQL connections can run SQL every time they connect, for example to set the schema search path or the time zone.</p>
+<ol class="tut">
+  <li><b>Open the editor</b><p>In the connection form, next to <b>Bootstrap commands</b>, click <b>Add…</b>.</p></li>
+  <li><b>Type the statements</b><p>For example <code>SET search_path TO app, public;</code> or <code>SET time_zone = '+00:00';</code>. They run in order.</p></li>
+  <li><b>Click Done, then Save</b><p>If a command fails, the connection stops with that command's error, so a typo doesn't go unnoticed.</p></li>
+</ol>
+<h2>Elasticsearch URL and TLS mode</h2>
+<ul>
+  <li><b>URL</b> is the whole address: <code>http://localhost:9200</code>, <code>https://my-cluster.es.io</code> or <code>https://gateway.example.com/es</code>. The port is optional: 443 for https, 80 for http.</li>
+  <li>A <code>user:password@</code> in the URL moves to <b>User</b> and <b>Password or API key</b> when you test or save, so the password goes to the Keychain.</li>
+  <li>For https URLs, <b>TLS mode</b> decides which certificates are accepted: <b>System CA (default)</b> for certificates macOS trusts (Elastic Cloud), <b>Custom CA certificate</b> for Elasticsearch's own <code>http_ca.crt</code>, and <b>Allow invalid certificates (insecure)</b> for self-signed local clusters.</li>
+</ul>
+<h2>Import from a URL</h2>
+<p>Click <b>Import URL…</b> and paste a connection URL. Tabulo fills in the form for you. URLs copied from TablePlus work too, including the connection name, the environment and SSH tunnels.</p>
+<pre><code>postgres://app:secret@db.internal:5432/shop?sslmode=require
+mysql://root@127.0.0.1:3306/shop
+mariadb://app@db.internal/shop
+redis://127.0.0.1:6379/2
+mongodb://admin@localhost:27017/orders
+mongodb+srv://cluster0.example.net/orders
+https://elastic@my-cluster.es.io
+postgresql+ssh://deploy@bastion.example.com/app@127.0.0.1/shop
+/Users/you/data/demo.sqlite</code></pre>
+<p>To share a connection, right-click it ▸ <b>Copy as URL</b>. <b>Copy as URL with Password</b> includes the saved password.</p>
+<h2>Organise with folders</h2>
+<ul>
+  <li><b>New Folder</b> at the bottom of the welcome window creates one.</li>
+  <li>Drag connections into a folder, or right-click a connection ▸ <b>Move to Folder</b>.</li>
+  <li>Drag a connection to <b>Connections</b> to take it out of a folder.</li>
+  <li>Right-click a folder to rename it, delete it, or add <b>New Connection Here</b>. Deleting a folder keeps its connections.</li>
+  <li>Folders remember whether they're open or collapsed.</li>
+</ul>
+<h2>More actions</h2>
+<ul>
+  <li><b>Search connections</b> at the top filters the list as you type.</li>
+  <li>Right-click a connection to <b>Edit…</b>, <b>Duplicate</b> or <b>Delete…</b>. Deleting also removes its saved password from the Keychain.</li>
+  <li>The <b>⋯</b> menu has <b>Export Connections…</b> and <b>Import Connections…</b>. The file is JSON and never includes passwords, so it's safe to share with your team.</li>
+</ul>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="first-connection.html"><span>Previous</span>Your first connection</a><a class="next" href="browse.html"><span>Next</span>Browse tables</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

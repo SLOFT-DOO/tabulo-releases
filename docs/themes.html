@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Themes | Tabulo docs">
+<meta property="og:description" content="Pick a look for the whole app: the query editor, the data grid, the sidebar and the tab and status bars change together.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Themes | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Pick a look for the whole app: the query editor, the data grid, the sidebar and the tab and status bars change together.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Themes <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html" aria-current="page">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Themes</h1><p>Pick a look for the whole app: the query editor, the data grid, the sidebar and the tab and status bars change together.</p></header>
+<figure><img src="../img/theme-midnight.jpg" width="1320" height="820" alt="Tabulo in the Midnight theme: navy sidebar, a SQL query with purple keywords and the customers table in a navy grid" class="shot"></figure>
+<h2>Choose a theme</h2>
+<ol class="tut">
+  <li><b>Open the theme list</b><p>Choose <b>Tabulo ▸ Settings…</b> (<kbd>⌘</kbd><kbd>,</kbd>) and click <b>Appearance</b>. Each theme shows a small preview with a sidebar, a line of SQL and a few grid rows.</p></li>
+  <li><b>Click a theme</b><p>Every open window changes at once. There is nothing to save, and Tabulo keeps the theme the next time you open it.</p></li>
+  <li><b>Or switch from the menu</b><p><b>View ▸ Theme</b> lists the same themes, with a check mark next to the one in use.</p></li>
+</ol>
+<figure><img src="../img/themes.jpg" width="700" height="664" alt="Settings, Appearance: preview cards for System, Paper, Solarized Light, Graphite, Midnight, Nord and Dracula" class="shot" style="width:560px"></figure>
+<h2>The themes</h2>
+<div class="table-wrap"><table><thead><tr><th>Theme</th><th>Mode</th><th>Look</th></tr></thead><tbody>
+<tr><td>System</td><td>Light or dark, like macOS</td><td>The standard Mac look. Follows <b>System Settings ▸ Appearance</b> and your accent colour. This is the default.</td></tr>
+<tr><td>Paper</td><td>Light</td><td>Warm off-white with ink-like colours.</td></tr>
+<tr><td>Solarized Light</td><td>Light</td><td>The low-contrast cream Solarized palette.</td></tr>
+<tr><td>Graphite</td><td>Dark</td><td>Neutral charcoal with bright syntax colours.</td></tr>
+<tr><td>Midnight</td><td>Dark</td><td>Deep navy with soft pastel highlights.</td></tr>
+<tr><td>Nord</td><td>Dark</td><td>The blue-grey Nord palette.</td></tr>
+<tr><td>Dracula</td><td>Dark</td><td>Purple-tinted dark with vivid syntax colours.</td></tr>
+</tbody></table></div>
+<p>A light or dark theme sets Tabulo's mode on its own, whatever macOS uses. Pick <b>System</b> to follow macOS again.</p>
+<h2>What a theme changes</h2>
+<ul>
+  <li><b>Query editor</b>: background, text, keyword, string, number and comment colours, the cursor and selected text.</li>
+  <li><b>Data grid</b>: rows and alternate rows, the selected rows, <code>NULL</code> values and grid lines. Query results use the same grid.</li>
+  <li><b>Window</b>: the sidebar, the tab bar, the status bar and the welcome window.</li>
+  <li><b>Accent colour</b>: buttons, switches and the line under the active tab.</li>
+</ul>
+<div class="note"><b>Colours that never change</b><span>The environment strip (production red, staging orange and so on) and the yellow, green and red highlights for edits you haven't committed look the same in every theme, so they keep their meaning. See <a href="safety.html">Safe mode &amp; environments</a> and <a href="edit.html">Edit rows</a>.</span></div>
+<p>Every theme is checked for readable contrast: normal text against its background is at least 4.5 to 1, and syntax colours and <code>NULL</code> at least 3 to 1.</p>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="ai.html"><span>Previous</span>AI access (MCP)</a><a class="next" href="updates.html"><span>Next</span>In-app updates</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

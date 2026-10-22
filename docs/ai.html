@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="AI access (MCP) | Tabulo docs">
+<meta property="og:description" content="Tabulo includes a Model Context Protocol server, so AI apps like Claude can browse and query your connections. You decide, per connection, whether they can read, write, or not see it at all.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>AI access (MCP) | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tabulo includes a Model Context Protocol server, so AI apps like Claude can browse and query your connections. You decide, per connection, whether they can read, write, or not see it at all.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">AI access (MCP) <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html" aria-current="page">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>AI access (MCP)</h1><p>Tabulo includes a Model Context Protocol server, so AI apps like Claude can browse and query your connections. You decide, per connection, whether they can read, write, or not see it at all.</p></header>
+<h2>How it works</h2>
+<p>An MCP app starts Tabulo in the background with <code>--mcp</code>. Tabulo reads your saved connections and passwords from the Keychain and answers the app's requests. No window opens, and nothing leaves your Mac except what the AI app sends to its own service.</p>
+<h2>Connect Claude Desktop</h2>
+<ol class="tut">
+  <li><b>Open the settings</b><p>Choose <b>Tabulo ▸ Settings…</b> and open <b>MCP Server</b>.</p></li>
+  <li><b>Add it</b><p>Under <b>Claude Desktop</b>, click <b>Add to Claude Desktop</b>. Tabulo writes the entry into Claude's config file. Or click <b>Copy Config</b> and add it yourself.</p>
+<pre><code>{
+  "mcpServers": {
+    "tabulo": {
+      "command": "/Applications/Tabulo.app/Contents/MacOS/Tabulo",
+      "args": ["--mcp"]
+    }
+  }
+}</code></pre></li>
+  <li><b>Restart Claude Desktop</b><p>Quit and reopen it. Tabulo's tools appear in Claude's tools menu.</p></li>
+  <li><b>Choose access per connection</b><p>Under <b>Access per connection</b> (or in each connection's form, <b>AI access (MCP)</b>), set:</p>
+    <ul>
+      <li><b>Off</b>: AI apps can't see the connection.</li>
+      <li><b>Read only</b> (the default): browse and run read-only queries. PostgreSQL, MySQL and SQLite sessions are opened read-only too, so a write can't slip through.</li>
+      <li><b>Read &amp; write</b>: also allows <code>execute_statement</code>.</li>
+    </ul></li>
+</ol>
+<h2>Claude Code and other apps</h2>
+<pre><code>claude mcp add tabulo --scope user -- /Applications/Tabulo.app/Contents/MacOS/Tabulo --mcp</code></pre>
+<p>Cursor, Codex and other MCP apps use the same command and argument. Settings shows the exact command for your copy of Tabulo.</p>
+<h2>Tools</h2>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>What it does</th></tr></thead><tbody>
+<tr><td><code>list_connections</code></td><td>Connections AI apps may use, with type, environment and access</td></tr>
+<tr><td><code>list_tables</code></td><td>Tables, views, collections, indices or Redis databases</td></tr>
+<tr><td><code>describe_table</code></td><td>Columns, keys, indexes, foreign keys and row count</td></tr>
+<tr><td><code>get_rows</code></td><td>Rows with filters, sorting and paging, the same way for every engine</td></tr>
+<tr><td><code>run_query</code></td><td>Read-only SQL, Redis, Mongo shell or Elasticsearch queries</td></tr>
+<tr><td><code>execute_statement</code></td><td>Changes data or structure. Only on Read &amp; write connections</td></tr>
+</tbody></table></div>
+<p><b>Settings ▸ MCP Server</b> lists recent tool calls, so you can see what an AI app asked for.</p>
+<div class="note warn"><b>If you move Tabulo</b><span>The config points to where Tabulo is. After moving the app, click <b>Add to Claude Desktop</b> again.</span></div>
+<h2>Try it</h2>
+<p>Ask Claude something like:</p>
+<ul>
+  <li>"Using Tabulo, which customers in Kotor have more than five orders?"</li>
+  <li>"Describe the orders table in my local Postgres and suggest an index for status lookups."</li>
+</ul>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="export.html"><span>Previous</span>Export data</a><a class="next" href="themes.html"><span>Next</span>Themes</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

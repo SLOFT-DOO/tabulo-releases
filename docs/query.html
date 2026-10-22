@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Query editor | Tabulo docs">
+<meta property="og:description" content="Each query tab speaks the connection's own language, with highlighting, autocomplete, several result tabs and a history you can search.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Query editor | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Each query tab speaks the connection's own language, with highlighting, autocomplete, several result tabs and a history you can search.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Query editor <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html" aria-current="page">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Query editor</h1><p>Each query tab speaks the connection's own language, with highlighting, autocomplete, several result tabs and a history you can search.</p></header>
+<figure><img src="../img/query.jpg" width="1320" height="820" alt="A SQL query joining customers and orders, with 248 result rows in a grid" class="shot"></figure>
+<h2>Run queries</h2>
+<ol class="tut">
+  <li><b>Open a query tab</b><p>Press <kbd>⌘</kbd><kbd>T</kbd>, or right-click a table ▸ <b>New Query From Here</b> for a tab that starts with a query on that table.</p></li>
+  <li><b>Write</b><p>Autocomplete suggests tables, columns and keywords as you type. Press <kbd>Esc</kbd> or <kbd>⌃</kbd><kbd>Space</kbd> to show it.</p></li>
+  <li><b>Run</b><p><kbd>⌘</kbd><kbd>↵</kbd> runs the statement under the cursor, or the selection if you selected text. <kbd>⇧</kbd><kbd>⌘</kbd><kbd>↵</kbd> runs everything. Each statement that returns rows gets its own result tab.</p></li>
+  <li><b>Reuse</b><p><b>History</b> lists past queries for this connection, newest first, with a search field.</p></li>
+</ol>
+<h2>Languages</h2>
+<h3>PostgreSQL and SQLite</h3>
+<p>Plain SQL. Statements are split on semicolons, and quotes, comments and <code>$$</code> dollar quoting are understood.</p>
+<h3>MySQL and MariaDB</h3>
+<p>Plain SQL. <code>`backtick`</code> identifiers, <code>#</code> comments and <code>\'</code> escapes inside strings are understood when splitting statements.</p>
+<pre><code>SHOW TABLES;
+SELECT city, COUNT(*) AS customers FROM shop.customers GROUP BY city ORDER BY 2 DESC;
+UPDATE shop.orders SET status = 'paid' WHERE id = 42;   # shows "1 affected"</code></pre>
+<h3>Redis</h3>
+<p>One command per line.</p>
+<pre><code>HGETALL user:1
+SCAN 0 MATCH session:* COUNT 100
+SET feature:new-checkout on EX 3600</code></pre>
+<h3>MongoDB</h3>
+<p>Shell syntax. <code>ObjectId("…")</code> and <code>ISODate("…")</code> work everywhere, including grid cells and filters.</p>
+<pre><code>db.users.find({ age: { $gt: 30 } }).sort({ name: 1 }).limit(20)
+db.orders.aggregate([{ $group: { _id: "$status", n: { $sum: 1 } } }])
+db.orders.updateMany({ status: "new" }, { $set: { status: "paid" } })
+show collections</code></pre>
+<p>Also supported: <code>insertOne/Many</code>, <code>deleteOne/Many</code>, <code>distinct</code>, <code>countDocuments</code>, <code>createIndex</code>, <code>getIndexes</code>, <code>drop</code>, <code>db.runCommand({…})</code> and <code>show dbs</code>.</p>
+<h3>Elasticsearch</h3>
+<p>Kibana Dev Tools requests, or SQL through the SQL API.</p>
+<pre><code>GET /products/_search
+{ "query": { "match": { "name": "lamp" } }, "size": 20 }
+
+GET _cat/indices?v
+
+SELECT category, AVG(price) FROM products GROUP BY category</code></pre>
+<p>Search hits, SQL results and <code>_cat</code> tables open as grids. Other responses show as formatted JSON.</p>
+<div class="note"><b>Changing data from the editor</b><span>On production connections, and with Safe mode on, Tabulo asks before running a statement that modifies data.</span></div>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="structure.html"><span>Previous</span>Change structure</a><a class="next" href="import.html"><span>Next</span>Import data</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

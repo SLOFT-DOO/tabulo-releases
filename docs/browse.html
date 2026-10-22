@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Browse tables | Tabulo docs">
+<meta property="og:description" content="Each connection opens in its own window: objects on the left, tabs on the right, and a native grid that pages through the data on the server.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Browse tables | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Each connection opens in its own window: objects on the left, tabs on the right, and a native grid that pages through the data on the server.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Browse tables <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html" aria-current="page">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Browse tables</h1><p>Each connection opens in its own window: objects on the left, tabs on the right, and a native grid that pages through the data on the server.</p></header>
+<figure><img src="../img/grid-customers.jpg" width="1320" height="820" alt="The customers table in the data grid with 250 rows" class="shot"></figure>
+<h2>The sidebar</h2>
+<ul>
+  <li>Lists tables and views (PostgreSQL, MySQL, SQLite), collections (MongoDB), databases and keys (Redis) or indices (Elasticsearch).</li>
+  <li>Type in <b>Filter tables</b> to narrow the list. Matching is fuzzy, so <code>ordit</code> finds <code>order_items</code>.</li>
+  <li>Right-click an object for <b>Open in New Tab</b>, <b>Open Structure</b>, <b>New Query From Here</b>, <b>Import Data…</b>, <b>Export…</b>, <b>Copy Name</b>, <b>Truncate…</b> and <b>Drop…</b>.</li>
+</ul>
+<h2>Tabs</h2>
+<ul>
+  <li><b>Single click</b> opens a table in a preview tab (italic title). The next single click replaces it.</li>
+  <li><b>Double-click</b> keeps the tab.</li>
+  <li><b>+</b> or <kbd>⇧</kbd><kbd>⌘</kbd><kbd>T</kbd> opens an empty tab that the next table you pick fills. A tab with pending edits is never replaced.</li>
+  <li><kbd>⌘</kbd><kbd>T</kbd> opens a query tab. <kbd>⇧</kbd><kbd>⌘</kbd><kbd>W</kbd> closes a tab. <kbd>⇧</kbd><kbd>⌘</kbd><kbd>]</kbd> and <kbd>⇧</kbd><kbd>⌘</kbd><kbd>[</kbd> move between tabs.</li>
+  <li><kbd>⌘</kbd><kbd>P</kbd> (<b>Open Anything</b>) jumps to any table by name.</li>
+</ul>
+<h2>The grid</h2>
+<ul>
+  <li><b>Paging:</b> rows load from the server one page at a time. Choose 100, 300, 500, 1000 or 5000 rows per page at the bottom right. <kbd>⌘</kbd><kbd>]</kbd> and <kbd>⌘</kbd><kbd>[</kbd> go to the next and previous page.</li>
+  <li><b>Sorting:</b> click a column header. Click again to reverse.</li>
+  <li><b>Selecting and copying:</b> select rows (with <kbd>⇧</kbd> or <kbd>⌘</kbd> for several) and press <kbd>⌘</kbd><kbd>C</kbd> to copy them as tab-separated text, which pastes cleanly into Numbers or Excel.</li>
+  <li><b>Refresh:</b> <kbd>⌘</kbd><kbd>R</kbd> reloads the page.</li>
+  <li><b>NULL</b> is shown in grey italics, so you can tell it apart from an empty string.</li>
+</ul>
+<h2>Filter rows</h2>
+<p>Click <b>Filter</b> or press <kbd>⌥</kbd><kbd>⌘</kbd><kbd>F</kbd>.</p>
+<ol class="tut">
+  <li><b>Add a rule</b><p>Pick a column and an operator: <code>=</code>, <code>≠</code>, <code>&lt;</code>, <code>&gt;</code>, contains, starts with, LIKE, IN, IS NULL and more. Type the value. Use <b>+</b> for more rules; every ticked rule must match.</p></li>
+  <li><b>Or write it yourself</b><p>The second line takes a raw filter in the engine's language: a SQL <code>WHERE</code> clause, a MongoDB filter document like <code>{ "status": "paid" }</code>, a Redis key pattern like <code>session:*</code>, or a Lucene query for Elasticsearch.</p></li>
+  <li><b>Apply</b><p>Click <b>Apply</b>. The button shows how many filters are active. <b>Clear</b> removes them.</p></li>
+</ol>
+<p>Right-click a cell for quick filters such as "column = this value".</p>
+<h2>Foreign keys</h2>
+<p>On PostgreSQL, MySQL and SQLite, cells in a foreign-key column show a small arrow. Click it, or right-click ▸ <b>Open table(column)</b>, to open the referenced table in a new tab filtered to that row. Composite keys work too. Hover a column header to see where its key points.</p>
+<h2>Row details and console</h2>
+<p>The right panel (<kbd>⌥</kbd><kbd>⌘</kbd><kbd>0</kbd>) has two views:</p>
+<ul>
+  <li><b>Row</b> (<kbd>⌥</kbd><kbd>⌘</kbd><kbd>I</kbd>): every field of the selected row with its type. Long values are easier to read and edit here.</li>
+  <li><b>Console</b> (<kbd>⇧</kbd><kbd>⌘</kbd><kbd>L</kbd>): every statement Tabulo ran for you, including the ones behind paging, filters and edits.</li>
+</ul>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="connections.html"><span>Previous</span>Connections & folders</a><a class="next" href="edit.html"><span>Next</span>Edit rows</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.6.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>
