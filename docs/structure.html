@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Change structure | Tabulo docs">
+<meta property="og:description" content="The Structure view edits columns, indexes and foreign keys in a grid. Tabulo writes the DDL, shows it to you, and runs it in one transaction.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Change structure | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="The Structure view edits columns, indexes and foreign keys in a grid. Tabulo writes the DDL, shows it to you, and runs it in one transaction.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Change structure <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html" aria-current="page">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Change structure</h1><p>The Structure view edits columns, indexes and foreign keys in a grid. Tabulo writes the DDL, shows it to you, and runs it in one transaction.</p></header>
+<figure><img src="../img/structure.jpg" width="1320" height="820" alt="Structure view of the orders table with columns, types, nullability, defaults, primary key and a foreign key to customers" class="shot"></figure>
+<h2>Open it</h2>
+<p>Switch a table tab from <b>Data</b> to <b>Structure</b>, or right-click a table ▸ <b>Open Structure</b>. It has three lists: <b>Columns</b>, <b>Indexes</b> and <b>Foreign Keys</b>.</p>
+<h2>Tutorial: add a column and an index</h2>
+<ol class="tut">
+  <li><b>Add the column</b><p>In <b>Columns</b>, click <b>+</b> (Add column). Name it <code>shipped_at</code>, choose the type <code>TIMESTAMP</code>, and leave <b>Nullable</b> ticked. The row turns green.</p></li>
+  <li><b>Change another column</b><p>Edit <code>status</code>: set the default to <code>'new'</code> and untick <b>Nullable</b>. The row turns yellow.</p></li>
+  <li><b>Add an index</b><p>Switch to <b>Indexes</b>, click <b>+</b>, and pick <code>status</code>. Expressions and DESC columns are allowed.</p></li>
+  <li><b>Review &amp; commit</b><p>Click <b>Review &amp; Commit…</b> (<kbd>⌘</kbd><kbd>S</kbd>). Tabulo shows the full DDL. Click <b>Commit</b> to run it in one transaction.</p></li>
+</ol>
+<h2>What you can change</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Where</th><th>Changes</th></tr></thead>
+<tbody>
+<tr><td>Columns</td><td>Add, drop or restore, duplicate, rename, type, nullable, default, comment, primary key (also composite)</td></tr>
+<tr><td>Indexes</td><td>Create and drop, unique, expressions, DESC</td></tr>
+<tr><td>Foreign keys</td><td>Add and drop (PostgreSQL, MySQL, SQLite)</td></tr>
+<tr><td>Table</td><td>Rename it in the name field next to the lists</td></tr>
+</tbody></table></div>
+<p>Pending changes use the same colours as in the grid: green new, yellow changed, red dropped. The undo arrow on a row reverts it. <b>Definition</b> shows the table's current <code>CREATE</code> statement.</p>
+<h2>MySQL</h2>
+<p>MySQL commits every DDL statement on its own, so Tabulo puts the whole change into <b>one</b> <code>ALTER TABLE</code>. MySQL 8 applies a single ALTER atomically: either every change lands, or none does. Changed columns are written with <code>CHANGE COLUMN</code> and their full definition, keeping <code>AUTO_INCREMENT</code>.</p>
+<pre><code>ALTER TABLE `orders`
+  CHANGE COLUMN `qty` `quantity` int NOT NULL DEFAULT 5,
+  ADD COLUMN `shipped_at` datetime NULL COMMENT 'when it left',
+  ADD INDEX `idx_quantity` (`quantity` DESC);</code></pre>
+<h2>SQLite</h2>
+<p>SQLite's <code>ALTER TABLE</code> can't change a column's type, NOT NULL, default or keys. For those, Tabulo does the rebuild SQLite documents: it creates the new table, copies the rows, and recreates indexes, UNIQUE constraints, foreign keys and AUTOINCREMENT. You see every statement in the review first.</p>
+<h2>MongoDB and Redis</h2>
+<p>MongoDB shows the fields Tabulo infers from documents, and lets you create and drop indexes. Redis shows server information from <code>INFO</code>.</p>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="edit.html"><span>Previous</span>Edit rows</a><a class="next" href="query.html"><span>Next</span>Query editor</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.7.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

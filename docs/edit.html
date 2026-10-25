@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Edit rows | Tabulo docs">
+<meta property="og:description" content="Edits are staged in the grid first. You see them coloured, review the generated SQL or commands, and commit them together in one transaction.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Edit rows | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Edits are staged in the grid first. You see them coloured, review the generated SQL or commands, and commit them together in one transaction.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Edit rows <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html" aria-current="page">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Edit rows</h1><p>Edits are staged in the grid first. You see them coloured, review the generated SQL or commands, and commit them together in one transaction.</p></header>
+<div class="legend"><span class="chip changed">yellow: changed</span><span class="chip new">green: new row</span><span class="chip dropped">red: deleted row</span></div>
+<h2>Make changes</h2>
+<ul>
+  <li><b>Edit a cell:</b> double-click it, type, press <kbd>↵</kbd>. <kbd>⇥</kbd> moves to the next cell.</li>
+  <li><b>Set NULL or empty:</b> right-click the cell. In the Row panel, tick <b>NULL</b>.</li>
+  <li><b>Add a row:</b> <kbd>⌘</kbd><kbd>I</kbd> or <b>+</b> at the bottom left.</li>
+  <li><b>Duplicate a row:</b> <kbd>⌘</kbd><kbd>D</kbd>.</li>
+  <li><b>Delete rows:</b> select them and press <kbd>⌫</kbd>.</li>
+</ul>
+<p>The bottom bar counts pending changes and the tab title gets a dot.</p>
+<h2>Review and commit</h2>
+<ol class="tut">
+  <li><b>Review</b><p>Click <b>Review…</b> or press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>S</kbd>. The window lists the exact statements, for example <code>UPDATE "orders" SET "note" = 'priority' WHERE "id" IS '9';</code>. <b>Copy</b> puts them on the clipboard.</p>
+    <figure><img src="../img/review.jpg" width="1320" height="820" alt="The Review changes window with one UPDATE statement and Copy, Cancel and Commit buttons" class="shot"></figure></li>
+  <li><b>Commit</b><p>Click <b>Commit</b>, or press <kbd>⌘</kbd><kbd>S</kbd> in the grid to commit without the review step. On engines with transactions, all statements run in one transaction: if one fails, none are applied.</p></li>
+  <li><b>Or discard</b><p>Click <b>Discard</b> in the bottom bar to throw away every pending change.</p></li>
+</ol>
+<div class="note"><b>Tables without a primary key</b><span>Tabulo shows "No primary key — edits match on all columns". Updates and deletes then use every column in the WHERE clause, so check the review before you commit.</span></div>
+<div class="note"><b>Production connections</b><span>On production connections, and any connection with Safe mode on, the review always opens before a commit. See <a href="safety.html">Safe mode &amp; environments</a>.</span></div>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="browse.html"><span>Previous</span>Browse tables</a><a class="next" href="structure.html"><span>Next</span>Change structure</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.7.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

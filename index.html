@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Tabulo for Mac">
+<meta property="og:description" content="Tabulo is a native macOS client for PostgreSQL, MySQL, SQLite, Redis, MongoDB and Elasticsearch. Edits are staged in the grid and shown as the exact statements before anything is written.">
+<meta property="og:image" content="img/grid.jpg">
+<title>Tabulo for Mac</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Tabulo is a native macOS client for PostgreSQL, MySQL, SQLite, Redis, MongoDB and Elasticsearch. Edits are staged in the grid and shown as the exact statements before anything is written.">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html"><img src="img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="index.html#features" class="hide-sm">Features</a>
+    <a href="docs/index.html">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap">
+  <h1><span>Edit your databases.</span> <span>Read the SQL first.</span></h1>
+  <div class="hero-grid">
+  <div>
+    <p class="lede">Tabulo is a native Mac client for PostgreSQL, MySQL, SQLite, Redis, MongoDB and Elasticsearch. Every edit waits in the grid until you have seen the exact statements it will run.</p>
+    <div class="ctas">
+      <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg> Download for Mac</a>
+      <a class="btn ghost" href="docs/first-connection.html">Take the five-minute tour</a>
+    </div>
+    <p class="meta">Version 0.7.0. Needs macOS 14 Sonoma or later on Apple silicon.</p>
+  </div>
+
+  <div>
+    <div class="demo" data-demo>
+      <div class="demo-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-title">orders<small>demo.db</small></span></div>
+      <div class="demo-grid"><table>
+        <thead><tr><th>id</th><th class="cust">customer_id</th><th>total</th><th>status</th><th>note</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <div class="demo-review" aria-live="polite"></div>
+      <div class="demo-status"><span class="count"></span><button type="button" data-act="discard">Discard</button><button type="button" class="commit" data-act="commit">Commit</button></div>
+    </div>
+    <p class="demo-hint"><span>Click a total, status or note to change it. Click an id to delete the row.</span><button type="button" data-act="reset">Reset example</button></p>
+  </div>
+  </div>
+</div></section>
+
+<section class="band panel"><div class="wrap">
+  <figure class="wide-shot" style="margin:0"><div class="shot"><img src="img/grid.jpg" width="1320" height="820" alt="Tabulo showing the orders table filtered to shipped orders over 1000, with one edited cell highlighted as a pending change and the row details panel open"></div>
+  <figcaption>The <code>orders</code> table, filtered to shipped orders over 1000. The yellow note is an edit that hasn't been written yet. The panel on the right shows every field of the selected row.</figcaption></figure>
+</div></section>
+
+<section class="band" id="engines"><div class="wrap">
+  <div class="intro"><h2>Six engines, one grid.</h2><p>Each engine keeps its own query language. Filters, the review step and the keyboard shortcuts work the same way in all of them.</p></div>
+  <div class="engines-wrap"><table class="engines">
+    <thead><tr><th>Engine</th><th>You query it with</th><th class="opt">Transactions</th><th>Worth knowing</th></tr></thead>
+    <tbody>
+      <tr><td>PostgreSQL</td><td>SQL</td><td class="opt">Yes</td><td>Schemas, views, foreign keys, SSL, full structure editing.</td></tr>
+      <tr><td>MySQL, MariaDB</td><td>SQL</td><td class="opt">Yes, on InnoDB</td><td>One database or all of them. Structure changes run as one ALTER TABLE.</td></tr>
+      <tr><td>SQLite</td><td>SQL</td><td class="opt">Yes</td><td>Open any file. Structure changes use the safe table rebuild.</td></tr>
+      <tr><td>Redis</td><td>Commands, one per line</td><td class="opt">No</td><td>Keys by database, every type in the grid.</td></tr>
+      <tr><td>MongoDB</td><td>Shell syntax</td><td class="opt">No</td><td>Fields inferred from documents. ObjectId and ISODate work in cells and filters.</td></tr>
+      <tr><td>Elasticsearch</td><td>Dev Tools requests, SQL</td><td class="opt">No</td><td>The mapping becomes columns. Documents are editable.</td></tr>
+    </tbody>
+  </table></div>
+  <p><a href="docs/databases.html">What each engine supports</a></p>
+</div></section>
+
+<section class="band" id="features"><div class="wrap">
+  <div class="feature">
+    <div class="text">
+      <h3>A query editor that speaks each engine's language</h3>
+      <p>Highlighting, autocomplete of tables and columns, and a history for each connection. <kbd>⌘</kbd><kbd>↵</kbd> runs the statement under the cursor, <kbd>⇧</kbd><kbd>⌘</kbd><kbd>↵</kbd> runs them all.</p>
+      <p><a href="docs/query.html">Query editor guide</a></p>
+    </div>
+    <figure class="shot"><img src="img/query.jpg" width="1320" height="820" alt="The query editor with a SQL join and a grid of results" loading="lazy"></figure>
+  </div>
+
+  <div class="feature">
+    <div class="text">
+      <h3>Seven themes, or just follow your Mac</h3>
+      <p>Paper, Solarized Light, Graphite, Midnight, Nord and Dracula recolour the editor, the grid and the window together. System keeps the standard macOS look. Pick one in <b>Settings ▸ Appearance</b> or <b>View ▸ Theme</b>.</p>
+      <p><a href="docs/themes.html">Themes</a></p>
+    </div>
+    <figure class="shot narrow"><img src="img/themes.jpg" width="700" height="664" alt="Theme previews for System, Paper, Solarized Light, Graphite, Midnight, Nord and Dracula" loading="lazy"></figure>
+  </div>
+
+  <div class="feature">
+    <div class="text">
+      <h3>Structure changes, written for you</h3>
+      <p>Rename columns, change types and defaults, add indexes and foreign keys. Tabulo writes the DDL, shows it, and runs it in one transaction. On SQLite it does the table rebuild and keeps your data.</p>
+      <p><a href="docs/structure.html">Change structure</a></p>
+    </div>
+    <figure class="shot"><img src="img/structure.jpg" width="1320" height="820" alt="The structure editor for the orders table showing five columns and a foreign key to customers" loading="lazy"></figure>
+  </div>
+
+  <div class="feature">
+    <div class="text">
+      <h3>Imports that tell you what they'll change</h3>
+      <p>Map CSV or JSON columns to the table, then insert, update rows that already exist, or skip them. If the file doesn't fit, you get a list of every column Tabulo would add or change, and why, before anything runs.</p>
+      <p><a href="docs/import.html">Import tutorial</a></p>
+    </div>
+    <figure class="shot narrow"><img src="img/import-review.jpg" width="1176" height="1014" alt="Import review listing three columns to add and one to change, each with a reason" loading="lazy"></figure>
+  </div>
+
+  <div class="feature">
+    <div class="text">
+      <h3>Exports in the format the next person wants</h3>
+      <p>CSV, JSON, SQL, Excel or Markdown. Export every row or only what the current filter shows. Several tables go into one SQL file, one workbook, or a folder.</p>
+      <p><a href="docs/export.html">Export guide</a></p>
+    </div>
+    <figure class="shot narrow"><img src="img/export.jpg" width="760" height="518" alt="The export window with CSV selected and its options" loading="lazy"></figure>
+  </div>
+
+  <div class="feature">
+    <div class="text">
+      <h3>Access for Claude and other AI apps, per connection</h3>
+      <p>Tabulo includes an MCP server, so Claude Desktop, Claude Code, Cursor and other MCP apps can list tables, read rows and run queries. Set each connection to <b>Off</b>, <b>Read only</b> or <b>Read &amp; write</b>. Passwords stay in your Keychain.</p>
+      <p><a href="docs/ai.html">Set up AI access</a></p>
+    </div>
+    <pre><code><span class="c"># Add Tabulo to Claude Code</span>
+claude mcp add tabulo --scope user -- \
+  /Applications/Tabulo.app/Contents/MacOS/Tabulo --mcp
+
+<span class="c"># Tools it gets</span>
+<span class="f">list_connections</span>  <span class="f">list_tables</span>  <span class="f">describe_table</span>
+<span class="f">get_rows</span>  <span class="f">run_query</span>
+<span class="f">execute_statement</span>  <span class="c"># Read &amp; write connections only</span></code></pre>
+  </div>
+</div></section>
+
+<section class="band panel" id="install"><div class="wrap install-grid">
+  <div>
+    <h2>Install it once. Updates come to you.</h2>
+    <ol>
+      <li><b>Download Tabulo.dmg</b><p>About 12 MB. Needs macOS 14 Sonoma or later on Apple silicon.</p></li>
+      <li><b>Drag Tabulo onto Applications</b><p>The disk image window shows you where. Then eject it.</p></li>
+      <li><b>The first time, right-click Tabulo and choose Open</b><p>Only needed once, until Tabulo is signed with an Apple Developer ID.</p></li>
+    </ol>
+    <p style="color:var(--muted);margin-bottom:24px">When a new version is out, Tabulo shows what changed and lets you install it, skip it, or be reminded later.</p>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16"/></svg> Download for Mac</a>
+  </div>
+  <figure class="shot"><img src="img/installer.jpg" width="660" height="422" alt="The Tabulo disk image window: drag the Tabulo icon onto the Applications folder" loading="lazy"></figure>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.7.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="docs/index.html">Docs</a>
+    <a href="docs/install.html">Install</a>
+    <a href="docs/shortcuts.html">Shortcuts</a>
+    <a href="docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

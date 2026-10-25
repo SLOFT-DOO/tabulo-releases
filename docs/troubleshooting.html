@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Troubleshooting | Tabulo docs">
+<meta property="og:description" content="Answers to the problems people run into most.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Troubleshooting | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Answers to the problems people run into most.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Troubleshooting <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html" aria-current="page">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Troubleshooting</h1><p>Answers to the problems people run into most.</p></header>
+<h2>"Tabulo can't be opened" on first launch</h2>
+<p>macOS shows this for apps not yet signed with an Apple Developer ID. Right-click Tabulo in Applications ▸ <b>Open</b> ▸ <b>Open</b>. On macOS 15, if there's no Open button, go to <b>System Settings ▸ Privacy &amp; Security</b> and click <b>Open Anyway</b>. You only do this once.</p>
+<h2>Tabulo asks for a password every time</h2>
+<p>Edit the connection and turn on <b>Save password in Keychain</b>. If macOS asks whether Tabulo may use the Keychain item, click <b>Always Allow</b>.</p>
+<h2>Can't connect to a server</h2>
+<ul>
+  <li>Click <b>Test</b> in the connection form to see the server's error.</li>
+  <li>Check host and port. Docker containers often use a different port on your Mac than inside the container.</li>
+  <li>For PostgreSQL in the cloud, try <b>SSL mode: Require</b>.</li>
+  <li>MySQL "Access denied for user": check the user and password, and that the user may connect from your Mac's address (<code>'user'@'%'</code> or your IP), not only from <code>localhost</code>.</li>
+  <li>For Elasticsearch, check that the <b>URL</b> starts with the right <code>http://</code> or <code>https://</code>, and whether it needs an API key.</li>
+  <li>Elasticsearch says the certificate isn't trusted: a local cluster usually has a self-signed certificate. Set <b>TLS mode</b> to <b>Custom CA certificate</b> and choose its <code>http_ca.crt</code>, or to <b>Allow invalid certificates (insecure)</b>.</li>
+  <li>A bootstrap command failed: the error names the command. Fix or remove it under <b>Bootstrap commands</b> in the connection form.</li>
+</ul>
+<h2>An edit or import failed</h2>
+<p>Open the <b>Console</b> (<kbd>⇧</kbd><kbd>⌘</kbd><kbd>L</kbd>) to see the statement and the database's error. On PostgreSQL, SQLite and MySQL (InnoDB) the whole change was rolled back, so nothing was half-written.</p>
+<h2>Claude doesn't see Tabulo</h2>
+<ul>
+  <li>Restart Claude Desktop after adding the server.</li>
+  <li>If you moved Tabulo, click <b>Add to Claude Desktop</b> again in <b>Settings ▸ MCP Server</b>.</li>
+  <li>Connections set to <b>Off</b> are hidden from AI apps on purpose.</li>
+</ul>
+<h2>Updates don't appear</h2>
+<p>Choose <b>Tabulo ▸ Check for Updates…</b>. If you skipped a version, Tabulo stays quiet until a newer one comes out. Check that <b>Settings ▸ Updates</b> has automatic checks on.</p>
+<h2>Where Tabulo keeps your data</h2>
+<div class="table-wrap"><table><thead><tr><th>What</th><th>Where</th></tr></thead><tbody>
+<tr><td>Saved connections</td><td><code>~/Library/Application Support/Tabulo/connections.json</code></td></tr>
+<tr><td>Folders</td><td><code>~/Library/Application Support/Tabulo/folders.json</code></td></tr>
+<tr><td>Query history</td><td><code>~/Library/Application Support/Tabulo/history.json</code></td></tr>
+<tr><td>Passwords</td><td>macOS Keychain, items named Tabulo</td></tr>
+</tbody></table></div>
+<p>To move to a new Mac, use <b>⋯ ▸ Export Connections…</b> and <b>Import Connections…</b> in the welcome window, then enter the passwords again.</p>
+<h2>Still stuck?</h2>
+<p>Report it on the <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">releases page</a> repository with your macOS version, Tabulo version (<b>Settings ▸ Updates</b>) and what the Console shows.</p>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="shortcuts.html"><span>Previous</span>Keyboard shortcuts</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.7.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

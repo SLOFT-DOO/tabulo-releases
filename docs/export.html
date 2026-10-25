@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Export data | Tabulo docs">
+<meta property="og:description" content="Export one or many tables to CSV, JSON, SQL, Excel or Markdown, as a file or to the clipboard.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Export data | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Export one or many tables to CSV, JSON, SQL, Excel or Markdown, as a file or to the clipboard.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Export data <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html">Import data</a></li><li><a href="export.html" aria-current="page">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Export data</h1><p>Export one or many tables to CSV, JSON, SQL, Excel or Markdown, as a file or to the clipboard.</p></header>
+<figure><img src="../img/export.jpg" width="760" height="518" alt="The Export window: tables on the left, format buttons and CSV options on the right" class="shot" style="width:640px"></figure>
+<h2>Tutorial: export two tables to Excel</h2>
+<ol class="tut">
+  <li><b>Open Export</b><p>Choose <b>File ▸ Export…</b> (<kbd>⇧</kbd><kbd>⌘</kbd><kbd>E</kbd>) or right-click a table ▸ <b>Export…</b>.</p></li>
+  <li><b>Pick tables</b><p>Tick <code>customers</code> and <code>orders</code>. <b>All</b> selects everything, and the filter field narrows a long list.</p></li>
+  <li><b>Pick the format</b><p>Click <b>Excel</b>. Several tables go into one workbook with a sheet per table.</p></li>
+  <li><b>Set the options</b><p>See the table below. Then click <b>Export…</b> and choose where to save.</p></li>
+</ol>
+<h2>Options</h2>
+<div class="table-wrap"><table><thead><tr><th>Format</th><th>Options</th></tr></thead><tbody>
+<tr><td>CSV</td><td>Field names in the first row, delimiter, always quote values, NULL as empty, line breaks as spaces</td></tr>
+<tr><td>JSON</td><td>An array of objects per table</td></tr>
+<tr><td>SQL</td><td>CREATE TABLE, DROP TABLE, INSERT statements in batches; several tables in one file</td></tr>
+<tr><td>Excel</td><td>One <code>.xlsx</code> workbook, one sheet per table</td></tr>
+<tr><td>Markdown</td><td>A table per database table, ready to paste into docs or an issue</td></tr>
+</tbody></table></div>
+<h2>Which rows</h2>
+<p>Export <b>all rows</b> (Tabulo pages through the server, so large tables work) or only the rows the current tab shows with its <b>filter and sort</b>. For CSV, JSON and Markdown with several tables, you can also write one file per table into a folder.</p>
+<h2>Quick export</h2>
+<p>The export button under a grid saves or copies the current page, or a query result, in any of the formats.</p>
+<h2>Connections</h2>
+<p>To share your saved connections, use <b>⋯ ▸ Export Connections…</b> in the welcome window. Passwords are never included.</p>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="import.html"><span>Previous</span>Import data</a><a class="next" href="ai.html"><span>Next</span>AI access (MCP)</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.7.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>

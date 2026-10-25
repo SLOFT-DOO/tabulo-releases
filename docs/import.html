@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Import data | Tabulo docs">
+<meta property="og:description" content="Bring rows in from CSV or JSON: add them, update the ones that already exist, or create a new table. If the file doesn't fit the table, Tabulo tells you exactly what it would change before anything runs.">
+<meta property="og:image" content="../img/grid.jpg">
+<title>Import data | Tabulo docs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Bring rows in from CSV or JSON: add them, update the ones that already exist, or create a new table. If the file doesn't fit the table, Tabulo tells you exactly what it would change before anything runs.">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="../index.html"><img src="../img/icon.png" alt="" width="30" height="30">Tabulo</a>
+  <nav aria-label="Main">
+    <a href="../index.html#features" class="hide-sm">Features</a>
+    <a href="../docs/index.html" aria-current="page">Docs</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases" class="hide-sm">Releases</a>
+    <button class="theme" type="button" aria-label="Switch light or dark theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <a class="btn primary" href="https://github.com/SLOFT-DOO/tabulo-releases/releases/latest/download/Tabulo.dmg">Download</a>
+  </nav>
+</div></header>
+<div class="wrap docs">
+<aside class="side" aria-label="Documentation"><button class="side-toggle" type="button" aria-expanded="false">Import data <span aria-hidden="true">▾</span></button><div class="groups"><div><h4>Get started</h4><ul><li><a href="index.html">Overview</a></li><li><a href="install.html">Install & update</a></li><li><a href="first-connection.html">Your first connection</a></li></ul></div><div><h4>Work with data</h4><ul><li><a href="connections.html">Connections & folders</a></li><li><a href="browse.html">Browse tables</a></li><li><a href="edit.html">Edit rows</a></li><li><a href="structure.html">Change structure</a></li><li><a href="query.html">Query editor</a></li></ul></div><div><h4>Move data</h4><ul><li><a href="import.html" aria-current="page">Import data</a></li><li><a href="export.html">Export data</a></li></ul></div><div><h4>More</h4><ul><li><a href="ai.html">AI access (MCP)</a></li><li><a href="themes.html">Themes</a></li><li><a href="updates.html">In-app updates</a></li><li><a href="safety.html">Safe mode & environments</a></li></ul></div><div><h4>Reference</h4><ul><li><a href="databases.html">Database notes</a></li><li><a href="shortcuts.html">Keyboard shortcuts</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></div></div></aside>
+<main class="article" id="main">
+<header><h1>Import data</h1><p>Bring rows in from CSV or JSON: add them, update the ones that already exist, or create a new table. If the file doesn't fit the table, Tabulo tells you exactly what it would change before anything runs.</p></header>
+<h2>Tutorial: update customers from a CSV</h2>
+<p>This file has two existing customers (ids 1 and 2) and one new one, plus three columns the table doesn't have yet.</p>
+<pre><code>id,name,email,city,vip,loyalty_points,phone
+1,Stefan J.,stefan@example.com,Bar,true,120,+382 67 111 222
+,New Customer,new.customer@example.com,Kotor,false,5,
+2,,ana@example.com,Cetinje,false,40,</code></pre>
+<ol class="tut">
+  <li><b>Start the import</b><p>Select the <code>customers</code> table and choose <b>File ▸ Import ▸ From CSV…</b> (<kbd>⇧</kbd><kbd>⌘</kbd><kbd>I</kbd>), or right-click the table ▸ <b>Import Data…</b>. Pick the file.</p></li>
+  <li><b>Check how the file is read</b><p>On the left: the delimiter (detected automatically), <b>First line is header</b>, the encoding, and <b>Empty values as NULL</b>. The header shows how many rows and columns Tabulo found.</p></li>
+  <li><b>Map the columns</b><p>Each file column shows its detected type and sample values, with the table column it goes to. <b>Match by</b> pairs them by name, by name ignoring case, or by position. Change any row to another column, to <b>New column</b> (with a name and type), or to skip it.</p>
+    <figure><img src="../img/import.jpg" width="1372" height="875" alt="The Import CSV window: file options on the left, seven file columns mapped to table columns, three of them marked new" class="shot"></figure></li>
+  <li><b>Choose what happens to existing rows</b><p>Under <b>Rows ▸ Insert option</b>:</p>
+    <div class="table-wrap"><table><thead><tr><th>Option</th><th>What it does</th></tr></thead><tbody>
+      <tr><td>Insert — stop on error</td><td>Adds every row. A duplicate key or bad value stops the import and nothing is written.</td></tr>
+      <tr><td>Update on duplicate key</td><td>Rows whose primary key (or any unique column) already exists are updated. The rest are added.</td></tr>
+      <tr><td>Skip rows with an existing key</td><td>Adds new rows and leaves existing ones alone.</td></tr>
+      <tr><td>Empty the table, then insert</td><td>Deletes all rows first.</td></tr>
+    </tbody></table></div>
+    <p>For this file, choose <b>Update on duplicate key</b>.</p></li>
+  <li><b>Read the structure review</b><p>Click <b>Import…</b>. Because the file doesn't match the table, a review opens before anything is written:</p>
+    <ul>
+      <li><b>Columns that will be added</b>, each with a type you can edit and the reason, for example "boolean values, e.g. 'true'".</li>
+      <li><b>Columns that will change</b>, with the reason. Here <code>name</code> must allow NULL because one row has no name. Other examples: <code>integer → numeric</code> because "1 value doesn't fit integer, e.g. '2.5' (row 2)", or a longer <code>varchar</code>.</li>
+      <li><b>Notes</b>, such as columns missing from the file and how SQLite applies the change.</li>
+      <li><b>Statements that will run first</b>: the exact DDL.</li>
+    </ul>
+    <figure><img src="../img/import-review.jpg" width="1176" height="1014" alt="The review: three columns will be added, name will allow NULL, notes, and the buttons Cancel, Import Without Changing Structure and Apply Changes &amp; Import" class="shot" style="width:620px"></figure></li>
+  <li><b>Decide</b><p>Untick anything you don't want. Then click <b>Apply Changes &amp; Import</b>, or <b>Import Without Changing Structure</b> to skip the DDL and leave unmatched columns out.</p></li>
+  <li><b>Check the result</b><p>Tabulo reports how many rows were new, updated and skipped. On PostgreSQL and SQLite the structure changes and the rows run in one transaction, so an error undoes both. MySQL commits column changes on their own, so it applies them first and then writes the rows in one transaction: a failed row undoes the rows, not the column changes.</p></li>
+</ol>
+<h2>Import into a new table</h2>
+<p>In <b>Target</b>, choose a new table (or collection, or index) instead of an existing one. Tabulo suggests a type for each column from the data, and you can change any of them.</p>
+<h2>JSON files</h2>
+<p><b>File ▸ Import ▸ From JSON…</b> reads an array of objects, newline-delimited JSON, <code>{"data": […]}</code>, Elasticsearch search hits, and MongoDB extended JSON.</p>
+<h2>SQL dumps</h2>
+<p><b>File ▸ Import ▸ From SQL Dump…</b> (PostgreSQL, MySQL and SQLite) runs a <code>.sql</code> file statement by statement. Dumps from <code>mysqldump</code> work as they are, including their <code>/*!40101 … */</code> lines.</p>
+<div class="note"><b>MongoDB and Elasticsearch</b><span>Both can be imported into, but they have no transactions. Rows written before an error stay written, and the result says how many.</span></div>
+
+<nav class="pager" aria-label="Pages"><a class="prev" href="query.html"><span>Previous</span>Query editor</a><a class="next" href="export.html"><span>Next</span>Export data</a></nav>
+</main>
+</div>
+<footer class="foot"><div class="wrap">
+  <span>Tabulo 0.7.0, a database client for Mac by SLOFT.</span>
+  <nav aria-label="Footer">
+    <a href="../docs/index.html">Docs</a>
+    <a href="../docs/install.html">Install</a>
+    <a href="../docs/shortcuts.html">Shortcuts</a>
+    <a href="../docs/troubleshooting.html">Help</a>
+    <a href="https://github.com/SLOFT-DOO/tabulo-releases/releases">Releases &amp; changelog</a>
+  </nav>
+</div></footer>
+</body>
+</html>
